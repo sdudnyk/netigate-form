@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+  <link rel='stylesheet' href='node_modules/normalize-css/normalize.css' type='text/css' media='all' />
+  <link rel='stylesheet' href='css/style.css' type='text/css' media='all' />
+  <title>Form</title>
+</head>
+<body>
+  <div class="wrapper">
+    <div class="panel">
+      <form action="">
+        <div class="form-field">
+          <label>Company name*</label><br>
+          <input id="company" type="text" name="company">
+        </div>
+
+        <div class="form-field">
+          <label>Email address (to receive sample) *</label><br>
+          <input id="email" type="email" name="email">
+        </div>
+
+        <div class="form-field">
+          <label>Would you also like to receive it as a text message?</label><br>
+          <select id="call-needed" name="call-needed">
+            <option value="yes">yes</option>
+            <option value="no">no</option>
+          </select>
+        </div>
+
+        <div id="phone" class="form-field">
+          <label>Mobile number*</label><br>
+          <input type="phone" name="phone">
+        </div>
+
+
+        <button type="submit" name="submit">
+          submit
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <script
+  src="https://code.jquery.com/jquery-1.12.0.min.js"
+  integrity="sha256-Xxq2X+KtazgaGuA2cWR1v3jJsuMJUozyIXDB3e793L8="
+  crossorigin="anonymous"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>
