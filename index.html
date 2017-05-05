@@ -5,25 +5,27 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
 
-  <link rel='stylesheet' href='node_modules/normalize-css/normalize.css' type='text/css' media='all' />
+  <link rel='stylesheet' href='https://cdnjs.cloudflare.com/ajax/libs/normalize/2.1.3/normalize.min.css' type='text/css' media='all' />
   <link rel='stylesheet' href='css/style.css' type='text/css' media='all' />
   <title>Form</title>
 </head>
 <body>
   <div class="wrapper">
     <div class="panel">
-      <form action="">
-        <div class="form-field">
+      <form action="" id="form">
+        <div class="form-field company">
           <label>Company name*</label><br>
-          <input id="company" type="text" name="company">
+          <input id="company" class="" type="text" name="company" autofocus>
+          <i class="loading-icon displaynone"></i>
+          <div id="n_suggestions-list" class="displaynone"><ul></ul></div>
         </div>
 
-        <div class="form-field">
+        <div class="form-field email">
           <label>Email address (to receive sample) *</label><br>
           <input id="email" type="email" name="email">
         </div>
 
-        <div class="form-field">
+        <div class="form-field call-needed">
           <label>Would you also like to receive it as a text message?</label><br>
           <select id="call-needed" name="call-needed">
             <option value="yes">yes</option>
@@ -31,9 +33,9 @@
           </select>
         </div>
 
-        <div id="phone" class="form-field">
+        <div class="form-field phone">
           <label>Mobile number*</label><br>
-          <input type="phone" name="phone">
+          <input id="phone" type="phone" name="phone">
         </div>
 
 
