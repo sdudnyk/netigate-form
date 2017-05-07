@@ -11,7 +11,10 @@ jQuery.fn._form = function(){
 
   }
 
+  // autofocus for IE
+  $('[autofocus]:not(:focus)').eq(0).focus();
 
+  // company input autocomplete
   var suggestionslist = form.find('#n_suggestions-list');
   companyAutocomplete();
   $('.form-field.company').on('mousedown', '#n_suggestions-list ul li', function(e) {
