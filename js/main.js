@@ -7,7 +7,7 @@ jQuery.fn._form = function(){
     phone: form.find('#phone')
   }
 
-  form.fullValidation = function(){
+  form.validation = function(){
 
   }
 
@@ -18,20 +18,14 @@ jQuery.fn._form = function(){
   var suggestionslist = form.find('#n_suggestions-list');
   companyAutocomplete();
   $('.form-field.company').on('mousedown', '#n_suggestions-list ul li', function(e) {
-
       var url = $(this).attr('data-url');
-
-      // Logo
-      jQuery('#logo img').removeClass('displaynone').attr('src', url);
       suggestionslist.addClass('displaynone');
 
       // Company name in input
       suggestionslist.siblings('.form-field.company input').val(jQuery(this).text()).attr('data-isfound', 'true');
   });
 
-
-
-
+  //hide phone input
   form.fields.callNeeded.change(function(){
     if(form.fields.callNeeded.find('option:selected').val() === 'yes'){
       form.fields.phone.parent().removeClass('displaynone');
@@ -40,6 +34,43 @@ jQuery.fn._form = function(){
     }
   });
 
+  form.fields.email.blur(function(){
+
+  })
+
+  $('.form-input').on('keyup change click blur', function(){
+    if(isFormValide()){
+      $("#submit-b").prop( "disabled", false );
+    }else{
+      $("#submit-b").prop( "disabled", true );
+    }
+  });
+
+
+  function isFormValide(){
+    var isCompanyValid = form.fields.company.val().length;
+    var isPhoneValid = form.fields.phone.val().length > 3;
+    var isEmailValid = form.fields.email.val().length && form.isEmailValid(form.fields.email.val());
+
+    if(form.fields.callNeeded.find('option:selected').val() === 'no'){
+      isPhoneValid = true;
+    }
+
+    return (isCompanyValid && isPhoneValid && isEmailValid)
+  }
+
+
+  // function lengthValidation(input){
+  //   if(input.value.length === 0){
+  //     $(input).parent().removeClass('valid');
+  //     $(input).parent().addClass('invalid');
+  //     return false;
+  //   }else{
+  //     $(input).parent().removeClass('invalid');
+  //     $(input).parent().addClass('valid');
+  //     return true;
+  //   }
+  // }
 
 
 
@@ -99,6 +130,11 @@ jQuery.fn._form = function(){
 
     suggestionslist.removeClass('displaynone').find('ul').empty().append(html);
     suggestionslist.removeClass('displaynone');
+  }
+
+  form.isEmailValid = function(email){
+    var regEx = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
+    return regEx.test(email);
   }
 
 

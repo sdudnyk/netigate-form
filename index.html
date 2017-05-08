@@ -15,14 +15,14 @@
       <form action="" id="form">
         <div class="form-field company">
           <label>Company name*</label><br>
-          <input id="company" class="" type="text" name="company" autofocus>
+          <input id="company" class="form-input" type="text" name="company" autofocus>
           <i class="loading-icon displaynone"></i>
           <div id="n_suggestions-list" class="displaynone"><ul></ul></div>
         </div>
 
         <div class="form-field email">
           <label>Email address (to receive sample) *</label><br>
-          <input id="email" type="email" name="email">
+          <input id="email" class="form-input" type="email" name="email" autocomplete="off">
         </div>
 
         <div class="form-field call-needed">
@@ -35,11 +35,11 @@
 
         <div class="form-field phone">
           <label>Mobile number*</label><br>
-          <input id="phone" type="phone" name="phone">
+          <input id="phone" class="form-input" type="phone" name="phone">
         </div>
 
 
-        <button type="submit" name="submit">
+        <button id="submit-b" type="submit" name="submit" disabled>
           submit
         </button>
       </form>
