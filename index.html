@@ -14,19 +14,19 @@
     <div class="panel">
       <form action="" id="form">
         <div class="form-field company">
-          <label>Company name*</label><br>
+          <label class="floating-label">Company name*</label><br>
           <input id="company" class="form-input" type="text" name="company" autofocus>
           <i class="loading-icon displaynone"></i>
           <div id="n_suggestions-list" class="displaynone"><ul></ul></div>
         </div>
 
         <div class="form-field email">
-          <label>Email address*</label><br>
+          <label class="floating-label">Email address*</label><br>
           <input id="email" class="form-input" type="email" name="email" autocomplete="off">
         </div>
 
         <div class="form-field" id="password-field">
-          <input class="form-input" type="password" name="pswd">
+          <input class="form-input" type="password" name="pswd" tabindex="100">
         </div>
 
         <div class="form-field call-needed">
@@ -38,7 +38,7 @@
         </div>
 
         <div class="form-field phone">
-          <label>Mobile number*</label><br>
+          <label class="floating-label">Mobile number*</label><br>
           <input id="phone" class="form-input" type="tel" name="phone">
         </div>
 

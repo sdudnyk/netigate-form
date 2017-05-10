@@ -31,6 +31,10 @@ jQuery.fn._form = function(){
     }
   }
 
+  $('.form-input').on('focus blur', function (e) {
+      $(this).parent().toggleClass('focused', (e.type === 'focus' || this.value.length > 0));
+  }).trigger('blur');
+
   // autofocus for IE
   $('[autofocus]:not(:focus)').eq(0).focus();
 
