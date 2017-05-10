@@ -9,7 +9,6 @@ var postcss = require('gulp-postcss');
 gulp.task('sass', function () {
   var processors = [
     autoprefixer({browsers: ['last 10 version']}),
-
   ];
 
  return gulp.src('./sass/**/*.scss')

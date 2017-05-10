@@ -21,13 +21,17 @@
         </div>
 
         <div class="form-field email">
-          <label>Email address (to receive sample) *</label><br>
+          <label>Email address*</label><br>
           <input id="email" class="form-input" type="email" name="email" autocomplete="off">
+        </div>
+
+        <div class="form-field" id="password-field">
+          <input class="form-input" type="password" name="pswd">
         </div>
 
         <div class="form-field call-needed">
           <label>Would you also like to receive it as a text message?</label><br>
-          <select id="call-needed" name="call-needed">
+          <select id="call-needed" name="call-needed" class="form-input">
             <option value="yes">yes</option>
             <option value="no">no</option>
           </select>
@@ -35,14 +39,16 @@
 
         <div class="form-field phone">
           <label>Mobile number*</label><br>
-          <input id="phone" class="form-input" type="phone" name="phone">
+          <input id="phone" class="form-input" type="tel" name="phone">
         </div>
 
 
         <button id="submit-b" type="submit" name="submit" disabled>
-          submit
+          get survey
         </button>
       </form>
+      <div class="form-submit-info">
+      </div>
     </div>
   </div>
 

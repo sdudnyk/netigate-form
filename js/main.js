@@ -4,11 +4,31 @@ jQuery.fn._form = function(){
     company: form.find('#company'),
     email: form.find('#email'),
     callNeeded: form.find('#call-needed'),
-    phone: form.find('#phone')
+    phone: form.find('#phone'),
+    password: form.find('#password-field input')
   }
 
-  form.validation = function(){
+  form.validate = function(){
+    //company field validate
+    if(form.fields.company.val().length){
+      addValidStyle(form.fields.company);
+    }else{
+      addInvalidStyle(form.fields.company);
+    }
 
+    //email field validate
+    if(form.isEmailValid(form.fields.email.val()) && form.fields.email.val().length){
+      addValidStyle(form.fields.email);
+    }else{
+      addInvalidStyle(form.fields.email);
+    }
+
+    //phone field validate
+    if(form.fields.company.val().length){
+      addValidStyle(form.fields.phone);
+    }else{
+      addInvalidStyle(form.fields.phone);
+    }
   }
 
   // autofocus for IE
@@ -34,8 +54,14 @@ jQuery.fn._form = function(){
     }
   });
 
-  form.fields.email.blur(function(){
-
+  form.fields.email.on('change blur', function(){
+    if(this.value.length){
+      if(form.isEmailValid(this.value)){
+        addValidStyle(this);
+      }else{
+        addInvalidStyle(this);
+      }
+    }
   })
 
   $('.form-input').on('keyup change click blur', function(){
@@ -47,32 +73,58 @@ jQuery.fn._form = function(){
   });
 
 
+  function addValidStyle(input){
+    $(input).parent().removeClass('invalid');
+    $(input).parent().addClass('valid');
+  }
+
+  function addInvalidStyle(input){
+    $(input).parent().removeClass('valid');
+    $(input).parent().addClass('invalid');
+  }
+
+
   function isFormValide(){
     var isCompanyValid = form.fields.company.val().length;
-    var isPhoneValid = form.fields.phone.val().length > 3;
+    var isPhoneValid = form.fields.phone.val().length >= 3;
     var isEmailValid = form.fields.email.val().length && form.isEmailValid(form.fields.email.val());
 
     if(form.fields.callNeeded.find('option:selected').val() === 'no'){
       isPhoneValid = true;
     }
 
-    return (isCompanyValid && isPhoneValid && isEmailValid)
+    return (isCompanyValid && isPhoneValid && isEmailValid);
   }
 
+  this.submit(function(e){
+    e.preventDefault();
 
-  // function lengthValidation(input){
-  //   if(input.value.length === 0){
-  //     $(input).parent().removeClass('valid');
-  //     $(input).parent().addClass('invalid');
-  //     return false;
-  //   }else{
-  //     $(input).parent().removeClass('invalid');
-  //     $(input).parent().addClass('valid');
-  //     return true;
-  //   }
-  // }
-
-
+    //if field for bot is filled
+    if(form.fields.password.val()){
+      return false;
+    }else{
+      if(isFormValide()){
+        // ajax request
+        if(true){
+          // then animation if success
+          form.slideUp('slow', function(){
+            $('.form-submit-info').append('The form was successfully sent, thank you!')
+            $('.form-submit-info').slideDown('slow');
+          })
+        }else{
+          // if failed
+          form.slideUp('slow', function(){
+            $('.form-submit-info').append('Form sending error, please try again later.<br>Thank you for understanding');
+            $('.form-submit-info').css('background-color', '#fb4242');
+            $('.form-submit-info').slideDown('slow');
+          });
+        }
+      }else{
+        form.validate();
+        return false;
+      }
+    }
+  });
 
   function companyAutocomplete(){
       var minlength = 3;
@@ -136,7 +188,6 @@ jQuery.fn._form = function(){
     var regEx = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/
     return regEx.test(email);
   }
-
 
 
   return form;
