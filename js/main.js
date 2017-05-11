@@ -32,7 +32,7 @@ jQuery.fn._form = function(){
   }
 
   $('.form-input').on('focus blur', function (e) {
-      $(this).parent().toggleClass('focused', (e.type === 'focus' || this.value.length > 0));
+      $(this).closest('.form-field').toggleClass('focused', (e.type === 'focus' || this.value.length > 0));
   }).trigger('blur');
 
   // autofocus for IE
@@ -52,11 +52,27 @@ jQuery.fn._form = function(){
   //hide phone input
   form.fields.callNeeded.change(function(){
     if(form.fields.callNeeded.find('option:selected').val() === 'yes'){
-      form.fields.phone.parent().removeClass('displaynone');
+      form.fields.phone.closest('.form-field').removeClass('displaynone');
     }else{
-      form.fields.phone.parent().addClass('displaynone');
+      form.fields.phone.closest('.form-field').addClass('displaynone');
     }
   });
+
+
+  if($.fn.intlTelInput){
+    $('.form-field.phone label').addClass('phone-label');
+
+    $('.form-field.phone #phone').intlTelInput({
+      initialCountry: "auto",
+      geoIpLookup: function(callback) {
+      $.get('https://ipinfo.io', function() {}, "jsonp").always(function(resp) {
+        var countryCode = (resp && resp.country) ? resp.country : "";
+        callback(countryCode);
+      });
+      }
+      // utilsScript: "/js/intl-tel-input/utils.js" // just for formatting/placeholders etc
+    });
+  }
 
   form.fields.email.on('change blur', function(){
     if(this.value.length){
@@ -108,7 +124,12 @@ jQuery.fn._form = function(){
       return false;
     }else{
       if(isFormValide()){
-        // ajax request
+        // ajax request here
+
+        for(var field in form.fields){
+          console.log(field + ' : ' + form.fields[field].val());
+        }
+
         if(true){
           // then animation if success
           form.slideUp('slow', function(){

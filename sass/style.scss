@@ -19,6 +19,14 @@ input, select, textarea, button{
   display: none;
 }
 
+.iti-flag {background-image: url("../images/flags.png");}
+@media only screen and (-webkit-min-device-pixel-ratio: 2), only screen and (min--moz-device-pixel-ratio: 2), only screen and (-o-min-device-pixel-ratio: 2 / 1), only screen and (min-device-pixel-ratio: 2), only screen and (min-resolution: 192dpi), only screen and (min-resolution: 2dppx) {
+  .iti-flag {background-image: url("../images/flags@2x.png");}
+}
+.intl-tel-input{
+  width: 100%;
+}
+
 .wrapper{
   width: 960px;
   padding: 40px 20px;
@@ -48,6 +56,10 @@ input, select, textarea, button{
   transform: translate3d(10px, 30px, 0) scale(1);
   transform-origin: left top;
   transition: 240ms;
+  &.phone-label{
+    z-index: 2;
+    left: 42px;
+  }
 }
 
 .form-field{
@@ -57,6 +69,7 @@ input, select, textarea, button{
     .floating-label{
       opacity: 1;
       transform: scale(1);
+      left: 0;
     }
   }
 }
