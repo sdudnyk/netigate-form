@@ -92,6 +92,45 @@ jQuery.fn._form = function(){
     }
   });
 
+  this.submit(function(e){
+    e.preventDefault();
+
+    //if field for bot is filled
+    if(form.fields.password.val()){
+      return false;
+    }else{
+      if(isFormValide()){
+        // ajax request here
+
+        for(var field in form.fields){
+          if(field == 'phone'){
+            var countryCode = $('.selected-flag').attr("title");
+            console.log(field + ' : ' + countryCode + ' ' + form.fields[field].val());
+          }else{
+            console.log(field + ' : ' + form.fields[field].val());
+          }
+        }
+
+        if(true){
+          // then animation if success
+          form.slideUp('slow', function(){
+            $('.form-submit-info').append('The form was successfully sent, thank you!')
+            $('.form-submit-info').slideDown('slow');
+          })
+        }else{
+          // if failed
+          form.slideUp('slow', function(){
+            $('.form-submit-info').append('Form sending error, please try again later.<br>Thank you for understanding');
+            $('.form-submit-info').css('background-color', '#fb4242');
+            $('.form-submit-info').slideDown('slow');
+          });
+        }
+      }else{
+        form.validate();
+        return false;
+      }
+    }
+  });
 
   function addValidStyle(input){
     $(input).parent().removeClass('invalid');
@@ -115,41 +154,6 @@ jQuery.fn._form = function(){
 
     return (isCompanyValid && isPhoneValid && isEmailValid);
   }
-
-  this.submit(function(e){
-    e.preventDefault();
-
-    //if field for bot is filled
-    if(form.fields.password.val()){
-      return false;
-    }else{
-      if(isFormValide()){
-        // ajax request here
-
-        for(var field in form.fields){
-          console.log(field + ' : ' + form.fields[field].val());
-        }
-
-        if(true){
-          // then animation if success
-          form.slideUp('slow', function(){
-            $('.form-submit-info').append('The form was successfully sent, thank you!')
-            $('.form-submit-info').slideDown('slow');
-          })
-        }else{
-          // if failed
-          form.slideUp('slow', function(){
-            $('.form-submit-info').append('Form sending error, please try again later.<br>Thank you for understanding');
-            $('.form-submit-info').css('background-color', '#fb4242');
-            $('.form-submit-info').slideDown('slow');
-          });
-        }
-      }else{
-        form.validate();
-        return false;
-      }
-    }
-  });
 
   function companyAutocomplete(){
       var minlength = 3;
