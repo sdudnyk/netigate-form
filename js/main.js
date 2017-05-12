@@ -24,16 +24,16 @@ jQuery.fn._form = function(){
     }
 
     //phone field validate
-    if(form.fields.company.val().length){
+    if(form.fields.phone.val().length){
       addValidStyle(form.fields.phone);
     }else{
       addInvalidStyle(form.fields.phone);
     }
   }
 
-  $('.form-input').on('focus blur', function (e) {
+  $('.form-input').on('focus blur change', function (e) {
       $(this).closest('.form-field').toggleClass('focused', (e.type === 'focus' || this.value.length > 0));
-  }).trigger('blur');
+  });
 
   // autofocus for IE
   $('[autofocus]:not(:focus)').eq(0).focus();
@@ -49,7 +49,7 @@ jQuery.fn._form = function(){
       suggestionslist.siblings('.form-field.company input').val(jQuery(this).text()).attr('data-isfound', 'true');
   });
 
-  //hide phone input
+  // hide phone input
   form.fields.callNeeded.change(function(){
     if(form.fields.callNeeded.find('option:selected').val() === 'yes'){
       form.fields.phone.closest('.form-field').removeClass('displaynone');
@@ -75,14 +75,28 @@ jQuery.fn._form = function(){
   }
 
   form.fields.email.on('change blur', function(){
-    if(this.value.length){
-      if(form.isEmailValid(this.value)){
-        addValidStyle(this);
-      }else{
-        addInvalidStyle(this);
-      }
+    if(form.isEmailValid(this.value)){
+      addValidStyle(this);
+    }else{
+      addInvalidStyle(this);
     }
-  })
+  });
+
+  form.fields.company.on('change blur', function(){
+    if(this.value.length){
+      addValidStyle(this);
+    }else{
+      addInvalidStyle(this);
+    }
+  });
+
+  form.fields.phone.on('change blur', function(){
+    if(this.value.length){
+      addValidStyle(this);
+    }else{
+      addInvalidStyle(this);
+    }
+  });
 
   $('.form-input').on('keyup change click blur', function(){
     if(isFormValide()){
@@ -133,13 +147,13 @@ jQuery.fn._form = function(){
   });
 
   function addValidStyle(input){
-    $(input).parent().removeClass('invalid');
-    $(input).parent().addClass('valid');
+    $(input).closest('.form-field').removeClass('invalid');
+    $(input).closest('.form-field').addClass('valid');
   }
 
   function addInvalidStyle(input){
-    $(input).parent().removeClass('valid');
-    $(input).parent().addClass('invalid');
+    $(input).closest('.form-field').removeClass('valid');
+    $(input).closest('.form-field').addClass('invalid');
   }
 
 
@@ -221,6 +235,5 @@ jQuery.fn._form = function(){
 
   return form;
 }
-
 
 var myForm = $('#form')._form();

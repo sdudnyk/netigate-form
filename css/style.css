@@ -4,14 +4,12 @@
 
 input, select, textarea, button {
   border-radius: 5px;
-  border: 1px solid #eee;
+  border: none;
   width: 100%;
   font-size: 16px;
   padding: 10px;
   background-color: #fff;
   outline: none; }
-  input:focus, select:focus, textarea:focus, button:focus {
-    border: 1px solid #30b5ec; }
 
 .displaynone {
   display: none; }
@@ -44,14 +42,17 @@ input, select, textarea, button {
     .panel {
       width: 100%; } }
 
+label {
+  color: rgba(0, 0, 0, 0.54); }
+
 .floating-label {
   font-size: 16px;
   font-weight: 400;
   opacity: 0.4;
   pointer-events: none;
   position: absolute;
-  -webkit-transform: translate3d(10px, 30px, 0) scale(1);
-          transform: translate3d(10px, 30px, 0) scale(1);
+  -webkit-transform: translate3d(0, 30px, 0) scale(1);
+          transform: translate3d(0, 30px, 0) scale(1);
   -webkit-transform-origin: left top;
       -ms-transform-origin: left top;
           transform-origin: left top;
@@ -59,17 +60,29 @@ input, select, textarea, button {
   transition: 240ms; }
   .floating-label.phone-label {
     z-index: 2;
-    left: 42px; }
+    left: 50px; }
 
 .form-field {
   margin-bottom: 15px;
-  position: relative; }
-  .form-field.focused .floating-label {
-    opacity: 1;
-    -webkit-transform: scale(1);
-        -ms-transform: scale(1);
-            transform: scale(1);
-    left: 0; }
+  position: relative;
+  border-bottom: 2px solid #eee; }
+  .form-field.focused {
+    border-bottom: 2px solid #30b5ec; }
+    .form-field.focused .floating-label {
+      opacity: 1;
+      -webkit-transform: scale(0.8);
+          -ms-transform: scale(0.8);
+              transform: scale(0.8);
+      left: 0;
+      color: #30b5ec; }
+  .form-field.valid {
+    border-bottom: 2px solid forestgreen; }
+    .form-field.valid label {
+      color: forestgreen; }
+  .form-field.invalid {
+    border-bottom: 2px solid red; }
+    .form-field.invalid label {
+      color: red; }
 
 #password-field {
   width: 0;
@@ -100,36 +113,6 @@ input, select, textarea, button {
     #submit-b:disabled:hover {
       background-color: #1795ca;
       color: #1795ca; }
-
-.valid:after, .invalid:after {
-  content: '';
-  display: block;
-  position: absolute;
-  width: 14px;
-  height: 14px;
-  border-radius: 100%;
-  top: 12px;
-  right: -6px; }
-
-.valid input, .valid select, .valid textarea {
-  border: 1px solid forestgreen; }
-
-.valid:after {
-  background-color: forestgreen;
-  background-image: url(../images/check-icon.png);
-  background-size: 60%;
-  background-repeat: no-repeat;
-  background-position: center center; }
-
-.invalid input, .invalid select, .invalid textarea {
-  border: 1px solid red; }
-
-.invalid:after {
-  background-color: red;
-  background-image: url(../images/cross-icon.png);
-  background-size: 60%;
-  background-repeat: no-repeat;
-  background-position: center center; }
 
 .loading-icon {
   cursor: default;
